@@ -3,69 +3,63 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#333467" />
   <title>Buurtcampus Krant</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <a href="#main" class="skip-link">Ga naar hoofdinhoud</a>
 
-  <!-- 🔹 Nieuwe navigatiebalk -->
-  <nav class="top-nav">
-    <div class="nav-inner">
-      <a href="#" class="logo-text">
-        <strong>Buurtcampus</strong>
-        <span>Hogeschool van Amsterdam</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Nieuws</a></li>
-        <li><a href="#" class="active">Voor wie</a></li>
-        <li><a href="#">Over</a></li>
-        <li><a href="#">Projecten</a></li>
-        <li><a href="#">Vacatures</a></li>
-        <li><a href="#">Agenda</a></li>
-        <li><a href="#">Nederlands</a></li>
-      </ul>
-    </div>
-  </nav>
+  <!-- 🎨 decoratieve iconen -->
+  <div class="decorations" aria-hidden="true">
+    <!-- Boven -->
+    <img src="44eca676-d081-4f9d-b733-5bd625829c87_removalai_preview.png" class="icon top-left" alt="">
+    <img src="Buurtcampus 59.png" class="icon top-right" alt="">
+    
+    <!-- Midden -->
+    <img src="Buurtcampus 60.png" class="icon mid-left" alt="">
+    <img src="Buurtcampus 61.png" class="icon mid-right" alt="">
 
-  <header class="masthead">
+    <!-- 🎨 Nieuw toegevoegde iconen -->
+    <img src="Buurtcampus 62.png" class="icon bottom-left" alt="">
+    <img src="Buurtcampus 63.png" class="icon bottom-right" alt="">
+    <img src="Buurtcampus 64.png" class="icon mid-top-left" alt="">
+    <img src="Buurtcampus 65.png" class="icon mid-top-right" alt="">
+  </div>
+
+  <!-- app content -->
+  <header class="masthead app-layer">
     <div class="wrap">
       <h1 class="logo">
         <span class="word buurt">BUURT</span>
-        <span class="hyphen" aria-hidden="true">-</span>
-        <span class="word campus">CAMPUS <i class="tri" aria-hidden="true"></i></span>
+        <span class="hyphen">-</span>
+        <span class="word campus">CAMPUS <i class="tri"></i></span>
         <span class="krant">KRANT</span>
       </h1>
-      <div class="clouds" aria-hidden="true">
-        <div class="cloud"></div><div class="cloud small"></div>
-      </div>
+
+      <nav class="mast-nav" aria-label="Locaties">
+        <a href="Zuidoost.html">Zuidoost</a>
+        <a href="#nieuwwest">Nieuw-West</a>
+        <a href="#oost">Oost</a>
+      </nav>
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" class="app-layer">
     <section class="front wrap">
       <figure class="cover">
-        <img src="Buurtkrant groene dag.jpg" width="1100" height="720" loading="lazy"
-             alt="Groep mensen aan tafel in gesprek in de Buurtcampus" />
-              alt="Groep mensen aan tafel in gesprek in de Buurtcampus" />
+        <img src="Buurtkrant groene dag.jpg" alt="Groep mensen aan tafel in gesprek in de Buurtcampus" />
         <figcaption>Waar leren tot leven komt!</figcaption>
       </figure>
 
-      <aside class="rail">
-        <article class="ribbon card card--teal">
-          <h2 class="h3">HvA = Hogeschool van Aanpakkers</h2>
-          <p>Docenten, onderzoekers en studenten werken in de buurten aan een leefbare stad: duurzaam, gezond en rechtvaardig.</p>
-        </article>
-        <article class="card card--geel">
-          <h2 class="h3">Amsterdam University of Applied Sciences</h2>
-          <p>Een plek voor go-getters. De AUAS werkt aan een leefbare, gezonde en rechtvaardige stad voor iedereen.</p>
-        </article>
-        <article class="card card--paars">
-          <h2 class="h3">Citaat</h2>
-          <p>“Amsterdam is een gemeenschap. Het is meer dan werk en opleiding: we maken de stad samen.”</p>
-        </article>
+      <aside class="textblok">
+        <h2>Over de Buurtcampus</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
+          Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+        </p>
+        <p>
+          Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.
+          Duis semper arcu massa, scelerisque vitae, consequat in, pretium a, enim.
+        </p>
       </aside>
     </section>
 
@@ -74,8 +68,6 @@
     </section>
 
     <section class="content wrap">
-      <h2 class="visually-hidden">Laatste berichten</h2>
-
       <article class="block block--accent">
         <h3>Buurtkeuken verbindt</h3>
         <p>Wekelijkse workshops rondom gezonde voeding en samenkomen in de wijk.</p>
@@ -84,7 +76,9 @@
 
       <article class="block">
         <h3>In gesprek met stadsdeelvoorzitter</h3>
-        <p>Gastcollege over rechtvaardigheid en bestuur. <time datetime="2025-09-18">18-09-2025</time></p>
+        <p>Gastcollege over rechtvaardigheid en bestuur.
+          <time datetime="2025-09-18">18-09-2025</time>
+        </p>
         <p><a class="link" href="#">Lees meer</a></p>
       </article>
 
@@ -95,9 +89,10 @@
       </article>
     </section>
 
+    <!-- galerij -->
     <section class="gallery-wrap">
       <div class="wrap">
-        <form class="filter">
+        <form class="filter" aria-label="Filter op stadsdeel">
           <input type="radio" id="f-all" name="f" checked />
           <label for="f-all">Alles</label>
 
@@ -112,33 +107,30 @@
         </form>
 
         <div class="gallery-grid">
-          <figure class="photo-card" data-cat="oost">
-            <img src="foto1.jpg" alt="Buurtbewoner bij speeltoestel" />
-            <img src="image00025.jpeg" alt="Buurtbewoner op een fiets" />
+          <figure id="oost" class="photo-card" data-cat="oost">
+            <img src="image00025.jpeg" alt="Buurtbewoner in Amsterdam Oost" loading="lazy" />
             <figcaption>
               <p class="badge">Buurtcampus</p>
               <h3>Amsterdam Oost</h3>
-              <a href="#" class="meer">Lees meer</a>
+              <a href="oost.html" class="meer">Lees meer</a>
             </figcaption>
           </figure>
 
-          <figure class="photo-card" data-cat="nieuwwest">
-            <img src="foto2.jpg" alt="Vrijwilliger bij vijverproject" />
-            <img src="Karin van de Wiel_DANE_DSC_2458.jpg" alt="Vrijwilliger bij vijverproject" />
+          <figure id="nieuwwest" class="photo-card" data-cat="nieuwwest">
+            <img src="Karin van de Wiel_DANE_DSC_2458.jpg" alt="Vrijwilliger in Nieuw-West" loading="lazy" />
             <figcaption>
               <p class="badge">Buurtcampus</p>
               <h3>Nieuw-West</h3>
-              <a href="#" class="meer">Lees meer</a>
+              <a href="nieuw-west.html" class="meer">Lees meer</a>
             </figcaption>
           </figure>
 
-          <figure class="photo-card" data-cat="zuidoost">
-            <img src="foto3.jpg" alt="Gezin voor schoolgebouw" />
-            <img src="WEB Straat014.jpg" alt="Man in pak" />
+          <figure id="zuidoost" class="photo-card" data-cat="zuidoost">
+            <img src="WEB Straat014.jpg" alt="Bewoner in Zuidoost" loading="lazy" />
             <figcaption>
               <p class="badge">Buurtcampus</p>
               <h3>Zuidoost</h3>
-              <a href="#" class="meer">Lees meer</a>
+              <a href="Zuidoost.html" class="meer">Lees meer</a>
             </figcaption>
           </figure>
         </div>
@@ -146,12 +138,10 @@
     </section>
   </main>
 
-  <footer class="foot">
+  <footer class="foot app-layer">
     <div class="wrap brand">
       <p>&copy; 2025 Buurtcampus Amsterdam</p>
-      <p>In samenwerking met OBA &amp; Hogeschool van Amsterdam</p>
     </div>
   </footer>
 </body>
-</html>
 </html>
