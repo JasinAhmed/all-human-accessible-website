@@ -5,17 +5,27 @@
   --grijs: #F4F6FA;
   --ink: #111;
   --accent: #ffdd99;
-  --tint-accent: #fffdfb;
-  --tint-accent-hover: #fffefc;
+  --teal: #2a9d8f;
+  --geel: #ffe08a;
+  --paars: #cab8ff;
+  --sky: #c9d1e2;
+  --focus: 3px solid var(--oranje);
+
+  /* Subtielere, lichtere tints voor kaarten */
+  --tint-accent: #fffdfb;        /* bijna wit, warm */
+  --tint-accent-hover: #fffefc;  /* subtiel warmer op hover */
+
   --tint-teal: #f3fbfa;
   --tint-geel: #fffbea;
   --tint-paars: #f7f3ff;
+
   --bd-accent: rgba(234,91,12,.08);
   --bd-teal: rgba(42,157,143,.16);
   --bd-geel: rgba(255,208,0,.18);
   --bd-paars: rgba(120,90,255,.14);
+
   --card-shadow: 0 6px 20px rgba(0,0,0,.05);
-  --card-shadow-hover: 0 10px 24px rgba(0,0,0,.1);
+  --card-shadow-hover: 0 10px 24px rgba(0,0,0,.10);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,233 +38,414 @@
   }
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+* { box-sizing: border-box; }
+img { max-width: 100%; height: auto; display: block; }
 
 body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  margin: 0;
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: var(--ink);
-  background: radial-gradient(100% 100% at 50% 0, #fff 0 35%, #f7f8fb 100%);
-  line-height: 1.5;
-  overflow-x: hidden;
-  @media screen and (min-width:1024px) { font-size: 17px; }
+  background:
+    radial-gradient(100% 100% at 50% 0, #ffffff 0 35%, #f7f8fb 100%),
+    repeating-linear-gradient(180deg, rgba(0, 0, 0, .012), rgba(0, 0, 0, .012) 2px, transparent 3px, transparent 6px);
 }
 
-header {
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
   background: var(--blauw);
-  color: var(--wit);
-  padding: 1rem 2rem;
+  color: #fff;
+  padding: .6rem .8rem;
+  border-radius: .4rem;
+}
+.skip-link:focus {
+  left: .5rem;
+  top: .5rem;
+  outline: var(--focus);
+}
+
+:focus-visible {
+  outline: var(--focus);
+  outline-offset: 2px;
+  border-radius: .25rem;
+}
+
+/* Top navigatiebalk */
+.top-nav {
+  background: #c3c9dc;
+  border-bottom: 3px solid var(--blauw);
+  padding: .6rem 1rem;
+}
+.top-nav .nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  @media screen and (min-width:1024px) { padding: 1.2rem 4rem; }
-  @media screen and (max-width:700px) {
-    flex-direction: column;
-    text-align: center;
-    gap: .5rem;
-  }
 }
-
-.logo {
-  font-weight: 800;
-  font-size: 1.5rem;
+.top-nav .nav-inner .logo-text {
+  text-decoration: none;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
 }
-
-nav ul {
+.top-nav .nav-inner .logo-text strong { font-size: 1.4rem; line-height: 1.1; }
+.top-nav .nav-inner .logo-text span { font-size: .9rem; color: #222; }
+.top-nav .nav-inner .nav-links {
   list-style: none;
   display: flex;
-  gap: 2rem;
-  @media screen and (min-width:768px) { gap: 3rem; }
-  @media screen and (max-width:700px) {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
 }
-
-nav a {
-  color: var(--wit);
+.top-nav .nav-inner .nav-links a {
   text-decoration: none;
-  transition: opacity .2s ease;
+  color: var(--blauw);
+  font-weight: 500;
+  background: transparent;
+  padding: .5rem 1rem;
+  border-radius: 999px;
+  transition: background-color .2s ease, transform .12s ease;
 }
-nav a:hover { opacity: .8; }
+.top-nav .nav-inner .nav-links a:hover { background: #e7eaf3; transform: translateY(-1px); }
+.top-nav .nav-inner .nav-links a.active { background: #f7f7fa; color: #000; font-weight: 600; }
 
-.search-bar {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  margin-top: .5rem;
-  @media screen and (min-width:480px) { justify-content: center; }
-  @media screen and (max-width:700px) {
-    flex-direction: column;
-    width: 100%;
+@media (max-width: 700px) {
+  .top-nav .nav-inner .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: .5rem;
   }
 }
-.search-bar input {
-  border: none;
-  border-radius: 12px;
-  padding: .5rem 1rem;
-  background: var(--wit);
-  color: var(--ink);
-  @media screen and (max-width:700px) { width: 90%; }
+
+/* Zijkant icon-bar */
+.icon-bar {
+  position: fixed;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(255,255,255,.9);
+  padding: 10px;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,.1);
+  z-index: 200;
 }
-.search-bar button {
-  background: var(--wit);
-  border: none;
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
+.icon-bar img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transition: transform .2s ease;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+}
+.icon-bar img:hover { transform: scale(1.15); }
+
+@media (max-width: 640px) {
+  .icon-bar {
+    top: auto; bottom: 10px; left: 50%; transform: translateX(-50%);
+    flex-direction: row; padding: 8px 12px; border-radius: 999px;
+  }
 }
 
-main {
-  padding: 1.5rem;
-  @media screen and (min-width:1024px) { padding: 2rem 4rem; }
+.wrap {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
+
+.masthead {
+  background: linear-gradient(180deg, #e9eef9, #dee7ff);
+  color: var(--blauw);
+  position: relative;
+  padding: 1.4rem 0 1rem;
+  border-bottom: .25rem solid var(--accent);
+}
+.masthead .logo {
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: .02em;
+  font-size: clamp(1.6rem, 2vw + 1rem, 2.5rem);
+}
+.masthead .logo .tri {
+  display: inline-block;
+  width: .65em;
+  height: .65em;
+  background: var(--oranje);
+  transform: skewX(-8deg);
+  margin: 0 .06em;
+  border-radius: 10%;
+}
+.masthead .krant {
+  background: #fff;
+  color: var(--blauw);
+  padding: .15rem .5rem;
+  border-radius: .5rem;
+  margin-left: .35rem;
+}
+.masthead .clouds {
+  position: absolute;
+  right: 1.2rem;
+  top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+.masthead .clouds .cloud {
+  width: 42px;
+  height: 20px;
+  background: #fff;
+  border-radius: 20px;
+  position: relative;
+  opacity: .9;
+}
+.masthead .clouds .cloud::before,
+.masthead .clouds .cloud::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+}
+.masthead .clouds .cloud::before { width: 16px; height: 16px; left: -8px; top: 2px; }
+.masthead .clouds .cloud::after { width: 18px; height: 18px; right: -8px; top: -2px; }
+.masthead .clouds .cloud.small { transform: scale(.8); }
 
 .front {
   display: grid;
   gap: 1rem;
-  margin-top: 2rem;
-  @media screen and (min-width:768px) { grid-template-columns: 2fr 1fr; }
-  @media screen and (min-width:1440px) {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  align-items: start;
+  margin-top: 1rem;
 }
+@media (min-width: 60rem) { .front { grid-template-columns: 1.6fr .9fr; } }
 
-.cover {
-  position: relative;
-  border-radius: 12px;
+.front .cover {
+  background: var(--grijs);
+  border-radius: .9rem;
   overflow: hidden;
+  position: relative;
   box-shadow: var(--card-shadow);
 }
-.cover img {
-  width: 100%;
-  aspect-ratio: 16/10;
-  object-fit: cover;
-}
-.cover figcaption {
+.front .cover img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+.front .cover figcaption {
   position: absolute;
-  bottom: .8rem;
-  left: .8rem;
-  background: var(--wit);
+  left: .9rem;
+  bottom: .9rem;
+  background: #fff;
   color: var(--blauw);
-  font-weight: 700;
-  padding: .4rem .8rem;
-  border-radius: .5rem;
+  font-weight: 800;
+  padding: .55rem .8rem;
+  border-radius: .6rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+  font-size: clamp(1rem, 1.2vw + .35rem, 1.25rem);
 }
 
-.card {
-  background: var(--wit);
-  border-radius: 10px;
+.front .rail { display: grid; gap: .9rem; }
+.front .rail .card {
+  background: #fff;
+  border-radius: .9rem;
   padding: 1rem;
   box-shadow: var(--card-shadow);
 }
-.card h3 {
-  color: var(--blauw);
-  margin-bottom: .3rem;
+.front .rail .card h3, .front .rail .card .h3 { margin: .1rem 0 .25rem; color: var(--blauw); font-size: 1rem; }
+
+/* ★ CONTRASTFIX: tekst in kaarten altijd goed zichtbaar */
+.front .rail .card p,
+.front .rail .card .meta,
+.front .rail .card .excerpt {
+  color: #2b2f3a;
+  opacity: 1 !important;
 }
-.card p { color: #333; }
-.card--teal {
+
+/* Lichtere varianten */
+.front .rail .card.card--teal {
   background: linear-gradient(180deg, var(--tint-teal), #fff);
   border: 1px solid var(--bd-teal);
 }
-.card--geel {
+.front .rail .card.card--geel {
   background: linear-gradient(180deg, var(--tint-geel), #fff);
   border: 1px solid var(--bd-geel);
 }
-.card--paars {
+.front .rail .card.card--paars {
   background: linear-gradient(180deg, var(--tint-paars), #fff);
   border: 1px solid var(--bd-paars);
 }
 
-.content {
-  display: grid;
-  gap: 1rem;
-  margin-top: 2rem;
-  @media screen and (min-width:768px) { grid-template-columns: repeat(3,1fr); }
-  @media screen and (min-width:1440px) {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+.front .rail .card.ribbon { position: relative; overflow: hidden; }
+.front .rail .card.ribbon::before {
+  content: "AMSTERDAM";
+  position: absolute;
+  left: -56px;
+  top: 10px;
+  transform: rotate(-90deg);
+  background: var(--oranje);
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .08em;
+  padding: .35rem .6rem;
+  border-radius: .5rem;
+  display: none;
+}
+@media (min-width: 60rem) {
+  .front .rail .card.ribbon::before { display: inline-block; }
 }
 
-.block {
-  background: var(--wit);
-  border-radius: 10px;
+.lead {
+  border-top: .2rem solid var(--accent);
+  margin: 1.1rem 0 0;
+  padding-top: .6rem;
+}
+.lead h2 {
+  margin: .2rem 0 0;
+  font-size: clamp(1.15rem, 1.2vw + .8rem, 1.6rem);
+  color: var(--blauw);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .9rem;
+  margin-top: .8rem;
+}
+@media (min-width: 48rem) { .content { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 60rem) { .content { grid-template-columns: repeat(3, 1fr); } }
+
+.content .block {
+  background: #fff;
+  border-radius: .9rem;
   padding: 1rem;
   box-shadow: var(--card-shadow);
 }
-.block h3 {
-  color: var(--blauw);
-  margin-bottom: .3rem;
-}
-.block--accent {
+/* Accentkaart: licht + volle tekstcontrast */
+.content .block.block--accent {
   background: linear-gradient(180deg, var(--tint-accent), #fff);
   border: 1px solid var(--bd-accent);
 }
-.block--accent:hover {
-  background: var(--tint-accent-hover);
+.content .block.block--accent:hover {
+  background: linear-gradient(180deg, var(--tint-accent-hover), #fff);
   transform: translateY(-2px);
   box-shadow: var(--card-shadow-hover);
   transition: all .25s ease;
 }
 
-.gallery {
-  background: var(--sky);
-  padding: 2rem 1rem;
-  margin-top: 2rem;
+/* ★ CONTRASTFIX: tekst in content-blokken */
+.content .block h3 { margin: .1rem 0 .25rem; color: var(--blauw); opacity: 1 !important; }
+.content .block p,
+.content .block .meta,
+.content .block .excerpt {
+  color: #2b2f3a;
+  opacity: 1 !important;
 }
-.gallery-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr;
-  @media screen and (min-width:768px) { grid-template-columns: repeat(3,1fr); }
-  @media screen and (min-width:1440px) {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+/* Links duidelijk */
+.content .block .link,
+.front .rail .card a,
+.content .block a {
+  color: var(--blauw);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 1 !important;
 }
 
-.photo-card {
-  background: var(--wit);
-  border-radius: 10px;
+.gallery-wrap {
+  background: var(--sky);
+  padding: 2rem 0;
+}
+.gallery-wrap .filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: 0 0 1rem;
+}
+.gallery-wrap .filter input { position: absolute; opacity: 0; pointer-events: none; }
+.gallery-wrap .filter label {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  padding: .5rem .8rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+}
+.gallery-wrap .filter input:focus-visible + label { outline: var(--focus); }
+.gallery-wrap .filter input:checked + label {
+  background: var(--oranje);
+  color: #fff;
+  border-color: transparent;
+}
+
+.gallery-wrap .gallery-grid {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 48rem) {
+  .gallery-wrap .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.gallery-wrap .photo-card {
+  position: relative;
   overflow: hidden;
-  box-shadow: var(--card-shadow);
+  border-radius: 1rem;
+  background: #fff;
   transition: transform .2s ease;
+  box-shadow: var(--card-shadow);
 }
-.photo-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--card-shadow-hover);
-}
-.photo-card img {
+.gallery-wrap .photo-card img {
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
+  transition: none;
 }
-.photo-card figcaption {
+.gallery-wrap .photo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+}
+.gallery-wrap .photo-card figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
   padding: 1rem;
-  background: var(--wit);
-  color: var(--blauw);
-  font-weight: 600;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  box-shadow: none;
+}
+.gallery-wrap .photo-card .badge { display: inline-block; margin: 0; font-size: .8rem; color: #1f2937; }
+.gallery-wrap .photo-card h3 { margin: .2rem 0; color: var(--blauw); font-size: 1.1rem; }
+.gallery-wrap .photo-card .meer { color: var(--oranje); font-weight: 600; text-decoration: none; }
+
+/* Filterlogica – Zuidoost zonder streepje, consequent */
+#f-all:checked ~ .gallery-grid .photo-card { display: block; }
+#f-oost:checked ~ .gallery-grid .photo-card { display: none; }
+#f-oost:checked ~ .gallery-grid .photo-card[data-cat="oost"] { display: block; }
+#f-nieuwwest:checked ~ .gallery-grid .photo-card { display: none; }
+#f-nieuwwest:checked ~ .gallery-grid .photo-card[data-cat="nieuwwest"] { display: block; }
+#f-zuidoost:checked ~ .gallery-grid .photo-card { display: none; }
+#f-zuidoost:checked ~ .gallery-grid .photo-card[data-cat="zuidoost"] { display: block; }
+
+.foot {
+  background: var(--blauw);
+  color: #fff;
+  padding: 1rem 0;
+  text-align: center;
 }
 
-footer {
-  background: var(--blauw);
-  color: var(--wit);
-  text-align: center;
-  padding: 1rem 0;
-  margin-top: 2rem;
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
